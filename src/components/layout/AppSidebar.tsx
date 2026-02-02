@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -75,9 +75,16 @@ const menuItems = [
 ];
 
 export function AppSidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem('sidebar-collapsed');
+    return saved === 'true';
+  });
   const location = useLocation();
   const { user, signOut } = useAuth();
+
+  useEffect(() => {
+    localStorage.setItem('sidebar-collapsed', String(collapsed));
+  }, [collapsed]);
 
   const handleNavClick = () => {
     setCollapsed(true);
