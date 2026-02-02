@@ -9,13 +9,15 @@ import {
   ChevronLeft,
   ChevronRight,
   RefreshCw,
-  Building2,
   FileSpreadsheet,
   Upload,
   Landmark,
   CheckCircle2,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 import fincartLogo from "@/assets/fincart-logo.png";
 
 const menuItems = [
@@ -74,6 +76,16 @@ const menuItems = [
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Logout realizado com sucesso!");
+  };
+
+  const userInitials = user?.user_metadata?.nome
+    ? user.user_metadata.nome.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+    : user?.email?.slice(0, 2).toUpperCase() || "U";
 
   return (
     <aside
@@ -146,13 +158,19 @@ export function AppSidebar() {
         <div className="p-4 border-t border-sidebar-border">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-sidebar-primary/20 flex items-center justify-center">
-              <span className="text-sm font-medium text-sidebar-primary">JD</span>
+              <span className="text-sm font-medium text-sidebar-primary">{userInitials}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate">João da Silva</p>
-              <p className="text-xs text-sidebar-foreground/70 truncate">
-                Administrador
+              <p className="text-sm font-medium truncate">
+                {user?.user_metadata?.nome || user?.email}
               </p>
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-1 text-xs text-sidebar-foreground/70 hover:text-destructive transition-colors"
+              >
+                <LogOut className="w-3 h-3" />
+                Sair
+              </button>
             </div>
           </div>
         </div>
