@@ -97,14 +97,14 @@ export function AppSidebar() {
       {/* Logo */}
       <div className={cn(
         "flex items-center justify-center border-b border-sidebar-border",
-        collapsed ? "h-16 px-2" : "h-24 px-3"
+        collapsed ? "h-16 px-2" : "h-20 px-4"
       )}>
         <img 
           src={fincartLogo} 
           alt="FinCart" 
           className={cn(
             "transition-all duration-300 object-contain",
-            collapsed ? "h-10 w-10" : "w-full h-auto max-h-20"
+            collapsed ? "h-10 w-10" : "w-44 h-auto"
           )}
         />
       </div>
