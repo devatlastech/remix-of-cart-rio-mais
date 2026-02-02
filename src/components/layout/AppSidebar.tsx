@@ -86,7 +86,8 @@ export function AppSidebar() {
     localStorage.setItem('sidebar-collapsed', String(collapsed));
   }, [collapsed]);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCollapsed(true);
   };
 
