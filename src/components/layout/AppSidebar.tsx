@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import fincartLogo from "@/assets/fincart-logo.png";
+import fincartIcon from "@/assets/fincart-icon.png";
 
 const menuItems = [
   {
@@ -100,7 +101,7 @@ export function AppSidebar() {
         collapsed ? "h-16 px-2" : "h-20 px-4"
       )}>
         <img 
-          src={fincartLogo} 
+          src={collapsed ? fincartIcon : fincartLogo} 
           alt="FinCart" 
           className={cn(
             "transition-all duration-300 object-contain",
