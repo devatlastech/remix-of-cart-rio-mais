@@ -119,6 +119,7 @@ export function AppSidebar() {
               <li key={item.path}>
                 <Link
                   to={item.path}
+                  onClick={() => setCollapsed(true)}
                   className={cn(
                     "flex items-center gap-3 px-3 py-2.5 rounded-md transition-all duration-200",
                     isActive
